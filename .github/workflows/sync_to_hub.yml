@@ -19,4 +19,4 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         # REPLACE 'YourHFUsername/RescueAI' with your actual HF Space address below!
-        run: git push https://Tirush12:$HF_TOKEN@huggingface.co/spaces/Tirush12/ResQ-Agent main
+        run: git push https://Tirush12:$HF_TOKEN@huggingface.co/spaces/Tirush12/ResQ-AgentV1 main
