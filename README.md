@@ -1,12 +1,14 @@
 ---
-title: {{title}}
-emoji: {{emoji}}
-colorFrom: {{colorFrom}}
-colorTo: {{colorTo}}
-sdk: {{sdk}}
-sdk_version: "{{sdkVersion}}"
-app_file: app.py
+title: ResQ AgentV1
+emoji: 🚀
+colorFrom: red
+colorTo: red
+sdk: docker
+app_port: 8501
+tags:
+  - streamlit
 pinned: false
+short_description: Streamlit template space
 ---
 
 Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference
