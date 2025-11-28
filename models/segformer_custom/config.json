@@ -1,0 +1,93 @@
+{
+  "architectures": [
+    "SegformerForSemanticSegmentation"
+  ],
+  "attention_probs_dropout_prob": 0.0,
+  "classifier_dropout_prob": 0.1,
+  "decoder_hidden_size": 256,
+  "depths": [
+    2,
+    2,
+    2,
+    2
+  ],
+  "downsampling_rates": [
+    1,
+    4,
+    8,
+    16
+  ],
+  "drop_path_rate": 0.1,
+  "dtype": "float32",
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.0,
+  "hidden_sizes": [
+    32,
+    64,
+    160,
+    256
+  ],
+  "id2label": {
+    "0": "Background",
+    "1": "Building Flooded",
+    "2": "Building Non-Flooded",
+    "3": "Road Flooded",
+    "4": "Road Non-Flooded",
+    "5": "Water",
+    "6": "Tree",
+    "7": "Vehicle",
+    "8": "Pool",
+    "9": "Grass"
+  },
+  "image_size": 224,
+  "initializer_range": 0.02,
+  "label2id": {
+    "Background": 0,
+    "Building Flooded": 1,
+    "Building Non-Flooded": 2,
+    "Grass": 9,
+    "Pool": 8,
+    "Road Flooded": 3,
+    "Road Non-Flooded": 4,
+    "Tree": 6,
+    "Vehicle": 7,
+    "Water": 5
+  },
+  "layer_norm_eps": 1e-06,
+  "mlp_ratios": [
+    4,
+    4,
+    4,
+    4
+  ],
+  "model_type": "segformer",
+  "num_attention_heads": [
+    1,
+    2,
+    5,
+    8
+  ],
+  "num_channels": 3,
+  "num_encoder_blocks": 4,
+  "patch_sizes": [
+    7,
+    3,
+    3,
+    3
+  ],
+  "reshape_last_stage": true,
+  "semantic_loss_ignore_index": 255,
+  "sr_ratios": [
+    8,
+    4,
+    2,
+    1
+  ],
+  "strides": [
+    4,
+    2,
+    2,
+    2
+  ],
+  "transformers_version": "4.57.1"
+}

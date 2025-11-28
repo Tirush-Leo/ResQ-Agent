@@ -1,0 +1,17 @@
+streamlit
+gradio
+torch
+torchvision
+transformers
+accelerate
+bitsandbytes
+langchain
+langchain-community
+langchain-groq
+langchain-huggingface
+ultralytics
+sahi
+opencv-python-headless
+sqlalchemy
+python-dotenv
+pillow
