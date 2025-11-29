@@ -50,18 +50,22 @@ The system uses secure, local session management via SQLite.
 * **Login:** Access your secure dashboard to start a mission.
 
 ![Login Screen](assets/login.png)
+![Login1 Screen](assets/login1.png)
 
 ### 2. Start a New Mission
 * Navigate to **"New Analysis"** in the sidebar.
 * **Upload:** Drag and drop a high-resolution drone image (JPG/PNG).
 * **Process:** Click **"Process Image"**. The AI pipeline will run object detection and segmentation in the background.
-
 ![Dashboard Upload](assets/dashboard.png)
+![Dashboard Upload](assets/dashboard1.png)
+
 
 ### 3. Review Intelligence
 Once processing is complete, the dashboard splits into two views:
 * **Left Panel (Visual Intel):** Displays the original scene, the AI-generated Flood Mask, and a color-coded legend explaining the terrain (Red=Flooded, Blue=Water, etc.).
 * **Right Panel (Command Center):** The chat interface is ready for your commands.
+![Dashboard Upload](assets/dashboard2.png)
+![Dashboard Upload](assets/dashboard3.png)
 
 ### 4. Interactive Command Chat
 Ask the AI strategic questions. It will answer using the extracted data.
