@@ -386,5 +386,5 @@ See the [`LICENSE`](LICENSE) file for details.
 **Tirush Dumil Wickramasingha**
 
 [GitHub](https://github.com/Tirush-Leo) •
-[LinkedIn](YOUR_LINKEDIN_URL) •
+[LinkedIn](https://www.linkedin.com/in/tirush-dumil/) •
 [Hugging Face](https://huggingface.co/Tirush12)
