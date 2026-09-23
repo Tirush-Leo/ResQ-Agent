@@ -1,187 +1,390 @@
 # 🚁 ResQ-Agent: Neuro-Symbolic Disaster Response AI
 
-[![Hugging Face Spaces](https://img.shields.io/badge/🤗%20Hugging%20Face-Open%20Live%20Demo-blue)](https://huggingface.co/spaces/Tirush12/ResQ-Agent)
+[![Hugging Face Spaces](https://img.shields.io/badge/🤗%20Hugging%20Face-Live%20Demo-blue)](https://huggingface.co/spaces/Tirush12/ResQ_Agent)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue)](https://www.python.org/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io/)
 [![YOLOv8](https://img.shields.io/badge/YOLOv8-Computer%20Vision-purple)](https://github.com/ultralytics/ultralytics)
-[![Llama-3](https://img.shields.io/badge/Llama3-Reasoning-orange)](https://groq.com/)
-[![License](https://img.shields.io/badge/License-Apache_2.0-green.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Llama 3](https://img.shields.io/badge/Llama%203-Reasoning-orange)](https://groq.com/)
+[![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)](https://opensource.org/licenses/Apache-2.0)
 
-> **A Neuro-Symbolic AI Agent for autonomous post-disaster structural assessment.**
-> ResQ-Agent combines fine-tuned Computer Vision models with Large Language Model reasoning to detect flood damage, map terrain, and answer strategic rescue questions in real-time.
-
----
-
-## 🎮 Try It Live
-
-You don't need to install anything to see ResQ-Agent in action. We have deployed a live version on Hugging Face Spaces.
-
-👉 **[Click Here to Launch ResQ-Agent](https://huggingface.co/spaces/Tirush12/ResQ_Agent)**
+> **A neuro-symbolic AI system for post-disaster drone-image analysis and decision support.**
+>
+> ResQ-Agent combines fine-tuned computer vision models, deterministic reasoning, and LLM-based interaction to analyze flood damage, assess terrain conditions, and answer disaster-response queries using structured visual evidence.
 
 ---
 
-## 📖 Project Overview
+## 🎮 Live Demo
 
-In critical disaster scenarios, manual analysis of drone footage is too slow, and generic AI models often hallucinate details. **ResQ-Agent** solves this by using a **Deterministic Neuro-Symbolic Pipeline**:
+ResQ-Agent is deployed on Hugging Face Spaces and can be tested without local installation.
 
-1.  **See (Perception):** It extracts ground-truth data using fine-tuned vision models.
-    * **YOLOv8** (SAHI-assisted) detects small objects like trapped vehicles and flooded houses.
-    * **SegFormer** performs pixel-wise segmentation to map flood water and road accessibility.
-2.  **Reason (Logic):** Instead of guessing, the agent calculates precise damage metrics (e.g., *"22% of buildings are flooded"*) using symbolic logic (Python).
-3.  **Report (Language):** It uses **Llama-3-70B** (via Groq LPUs) to synthesize professional situation reports and answer user questions based *only* on the verified data.
+👉 **[Launch ResQ-Agent](https://huggingface.co/spaces/Tirush12/ResQ_Agent)**
+
+---
+
+## 📖 Overview
+
+Rapid interpretation of aerial imagery is critical after natural disasters, but manually reviewing large volumes of drone imagery can be slow and difficult.
+
+ResQ-Agent addresses this problem using a **Perception → Logic → Language** architecture.
+
+Instead of sending raw images directly to an LLM, the system first extracts structured information using specialized computer vision models. Deterministic logic then transforms those predictions into interpretable disaster metrics before the resulting evidence is provided to the language model.
+
+This architecture is designed to reduce unsupported responses and make generated reports more closely grounded in the outputs of the perception pipeline.
+
+### Pipeline
+
+1. **Perception**
+   - Fine-tuned **YOLOv8m** detects objects such as flooded buildings, non-flooded buildings, vehicles, and swimming pools.
+   - **SAHI (Slicing Aided Hyper Inference)** improves small-object detection in high-resolution drone imagery.
+   - Fine-tuned **SegFormer MiT-B0** performs semantic segmentation for flood extent, road accessibility, and terrain analysis.
+
+2. **Deterministic Reasoning**
+   - Python-based logic converts model predictions into structured statistics and interpretable disaster indicators.
+   - Examples include object counts, affected-area estimates, flood coverage, and road-accessibility information.
+
+3. **Language Reasoning**
+   - **Llama 3**, served through Groq, receives the structured evidence together with the user's question.
+   - The model generates situation summaries and answers disaster-response queries using the extracted information as context.
 
 ---
 
 ## ✨ Key Features
 
-* **🚁 Autonomous Detection:** Fine-tuned YOLOv8m detects flooded/non-flooded buildings, vehicles, and pools with **76.7% mAP**.
-* **🌍 Terrain Segmentation:** Fine-tuned SegFormer (MiT-b0) maps flood extent, road accessibility, and vegetation coverage.
-* **🧠 Neuro-Symbolic Reasoning:** Eliminates hallucination by separating *perception* (Vision Models) from *reasoning* (LLM).
-* **⚡ Enterprise Speed:** Uses **Groq LPUs** for sub-second text generation and **SAHI (Slicing Aided Hyper Inference)** for high-res image processing.
-* **💬 Interactive Analyst:** A Streamlit-based Chat UI with session memory, allowing users to ask strategic questions like *"Is the road passable?"* or *"Are there survivors trapped?"*.
+- **🚁 Multi-Model Visual Perception**  
+  Combines object detection and semantic segmentation to analyze high-resolution post-disaster imagery.
 
----
+- **🔍 Small-Object Detection with SAHI**  
+  Uses adaptive image slicing to improve detection of small objects such as vehicles and distant structures.
 
-## 🚀 How to Use ResQ-Agent
+- **🌍 Terrain Understanding**  
+  SegFormer produces pixel-level maps for flood extent, vegetation, roads, buildings, and other terrain classes.
 
-### 1. Authentication
-The system uses secure, local session management via SQLite.
-* **Sign Up:** Create a new account with a unique username and password.
-* **Login:** Access your secure dashboard to start a mission.
+- **🧠 Neuro-Symbolic Reasoning**  
+  Separates learned visual perception from deterministic calculations before passing structured evidence to the LLM.
 
-![Login Screen](assets/login.png)
-![Login1 Screen](assets/login1.png)
+- **🛡️ Grounded LLM Responses**  
+  Mitigates hallucinations by grounding language-model responses in structured outputs produced by the vision and reasoning layers.
 
-### 2. Start a New Mission
-* Navigate to **"New Analysis"** in the sidebar.
-* **Upload:** Drag and drop a high-resolution drone image (JPG/PNG).
-* **Process:** Click **"Process Image"**. The AI pipeline will run object detection and segmentation in the background.
-![Dashboard Upload](assets/dashboard.png)
-![Dashboard Upload](assets/dashboard1.png)
+- **⚡ Optimized Inference**  
+  Uses Groq-based LLM inference and adaptive image slicing to reduce end-to-end inference latency.
 
+- **💬 Interactive Analysis**  
+  Streamlit-based interface allows users to upload imagery, inspect predictions, and ask scenario-specific questions.
 
-### 3. Review Intelligence
-Once processing is complete, the dashboard splits into two views:
-* **Left Panel (Visual Intel):** Displays the original scene, the AI-generated Flood Mask, and a color-coded legend explaining the terrain (Red=Flooded, Blue=Water, etc.).
-* **Right Panel (Command Center):** The chat interface is ready for your commands.
-![Dashboard Upload](assets/dashboard2.png)
-![Dashboard Upload](assets/dashboard3.png)
-
-### 4. Interactive Command Chat
-Ask the AI strategic questions. It will answer using the extracted data.
-* *Example:* "Summarize the structural damage."
-* *Example:* "Is the main road accessible for a truck?"
-* *Example:* "Are there any swimming pools I should be aware of?"
-
-![Analysis & Chat](assets/analysis.png)
+- **🔐 Session Management**  
+  SQLite-based authentication and conversation persistence support multiple analysis sessions.
 
 ---
 
 ## 🏗️ System Architecture
 
-The system follows a "Perception-Logic-Language" workflow designed for high reliability:
+ResQ-Agent follows a three-stage neuro-symbolic workflow:
 
 ```mermaid
 graph LR
-    A[Drone Image] --> B(Perception Module);
-    B --> C{Logic Core};
-    B -->|YOLOv8| D[Object Counts];
-    B -->|SegFormer| E[Flood Map];
-    D --> C;
-    E --> C;
-    C -->|Structured Data| F[Llama-3 Agent];
-    U[User Question] --> F;
-    F --> G[Strategic Report];
+    A[Drone Image] --> B[Perception Layer]
+
+    B --> C[YOLOv8 + SAHI]
+    B --> D[SegFormer]
+
+    C --> E[Object Predictions]
+    D --> F[Semantic Flood Map]
+
+    E --> G[Deterministic Logic]
+    F --> G
+
+    G --> H[Structured Disaster Evidence]
+
+    H --> I[Llama 3 via Groq]
+    J[User Question] --> I
+
+    I --> K[Situation Report / Response]
 ```
 
-## 📊 Performance Metrics
+### Architecture Layers
 
-The system's components were rigorously evaluated on the FloodNet test set.
-
-| Model | Task | Dataset | Metric | Score |
-| :--- | :--- | :--- | :--- | :--- |
-| **YOLOv8m** | Object Detection | FloodNet (Track 2) | mAP50 | **76.7%** |
-| **SegFormer-b0** | Semantic Segmentation | FloodNet (Track 1) | mIoU | **~82%** |
-| **Llama-3-70B** | Strategic Reasoning | Synthetic QA Pairs | Human Eval | **Pass** |
-
-*Note: Object detection performance is boosted by SAHI (Slicing Aided Hyper Inference), which improves small object detection (e.g., vehicles) by ~15% compared to standard inference.*
-
-## 🛠️ Local Installation
-
-To run ResQ-Agent on your own machine (GPU recommended for optimal vision performance):
-
-### 1. Clone the Repository
-```bash
-git clone [https://github.com/Tirush-Leo/ResQ-Agent.git](https://github.com/Tirush-Leo/ResQ-Agent.git)
-cd ResQ-Agent
-```
-### 2. Install Dependencies
-It is recommended to use a virtual environment.
-```bash
-# Create and activate virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows use: venv\Scripts\activate
-
-# Install libraries
-pip install -r requirements.txt
-```
-### 3. Setup Models (Git LFS)
-Due to their large file size, the fine-tuned models are stored using Git Large File Storage (LFS).
-```bash
-git lfs install
-git lfs pull
-```
-Verification: Ensure models/yolov8_floodnet.pt and the models/segformer_custom/ folder are present and not just 1KB pointer files.
-### 4. Setup API Keys
-Create a .env file in the root directory to store your Groq API key securely.
-```bash
-git lfs install
-git lfs pull
-```
-### 5. Run the App
-Launch the Streamlit interface.
-```bash
-git lfs install
-git lfs pull
-```
+| Layer | Component | Responsibility |
+|---|---|---|
+| **Perception** | YOLOv8m + SAHI | Object detection in high-resolution imagery |
+| **Perception** | SegFormer MiT-B0 | Pixel-level terrain and flood segmentation |
+| **Reasoning** | Python logic | Deterministic calculation of disaster metrics |
+| **Language** | Llama 3 + Groq | Evidence-grounded reporting and question answering |
+| **Application** | Streamlit | Interactive user interface |
+| **Persistence** | SQLite | Authentication and conversation/session storage |
 
 ---
 
-### **3. Project Structure Section**
+## 📊 Performance
 
+The vision components were evaluated using the **FloodNet** dataset.
+
+| Model | Task | Dataset | Metric | Result |
+|---|---|---|---|---:|
+| **YOLOv8m** | Object Detection | FloodNet Track 2 | mAP50 | **76.7%** |
+| **SegFormer MiT-B0** | Semantic Segmentation | FloodNet Track 1 | mIoU | **~82%** |
+
+### Inference Optimization
+
+- **~15% improvement** in small-object detection using SAHI compared with standard inference.
+- **~70% reduction in inference latency** through optimized inference, Groq-based LLM serving, and adaptive image slicing.
+
+> Performance values correspond to the experimental configurations used during development and may vary depending on hardware, image resolution, and inference settings.
+
+### LLM Reasoning
+
+The language layer was evaluated qualitatively using scenario-based disaster-response questions generated from structured model outputs.
+
+Unlike the perception models, this component is therefore **not reported with a formal benchmark score** in this repository.
+
+---
+
+## 🖥️ Using the Application
+
+### 1. Authentication
+
+The application uses local SQLite-based session management.
+
+- **Sign Up:** Create an account with a username and password.
+- **Login:** Access the analysis dashboard and previous sessions.
+
+<p align="center">
+  <img src="assets/login.png" width="48%" alt="ResQ-Agent login screen">
+  <img src="assets/login1.png" width="48%" alt="ResQ-Agent authentication screen">
+</p>
+
+### 2. Start a Mission
+
+From the **New Analysis** page:
+
+1. Upload a high-resolution drone image in JPG or PNG format.
+2. Select **Process Image**.
+3. The perception pipeline performs object detection and semantic segmentation.
+4. Structured disaster information is generated for downstream reasoning.
+
+<p align="center">
+  <img src="assets/dashboard.png" width="48%" alt="ResQ-Agent dashboard">
+  <img src="assets/dashboard1.png" width="48%" alt="Drone image upload workflow">
+</p>
+
+### 3. Review Visual Intelligence
+
+After inference, the dashboard provides visual and analytical outputs.
+
+**Visual Analysis**
+- Original drone image
+- Detected objects
+- Flood segmentation mask
+- Terrain visualization
+
+**Command Interface**
+- Structured disaster information
+- LLM-assisted analysis
+- Interactive disaster-response queries
+
+<p align="center">
+  <img src="assets/dashboard2.png" width="48%" alt="ResQ-Agent visual analysis">
+  <img src="assets/dashboard3.png" width="48%" alt="ResQ-Agent command interface">
+</p>
+
+### 4. Ask Strategic Questions
+
+Example queries include:
+
+- *"Summarize the structural damage."*
+- *"Is the main road accessible for emergency vehicles?"*
+- *"How many buildings appear to be affected?"*
+- *"Which regions should responders inspect first?"*
+
+<p align="center">
+  <img src="assets/analysis.png" width="90%" alt="ResQ-Agent analysis and chat interface">
+</p>
+
+---
+
+## 🛠️ Local Installation
+
+### Prerequisites
+
+- Python **3.10+**
+- Git
+- Git LFS
+- Groq API key
+- GPU recommended for faster computer-vision inference
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/Tirush-Leo/ResQ-Agent.git
+cd ResQ-Agent
+```
+
+### 2. Create a Virtual Environment
+
+#### Linux / macOS
+
+```bash
+python -m venv venv
+source venv/bin/activate
+```
+
+#### Windows
+
+```bash
+python -m venv venv
+venv\Scripts\activate
+```
+
+### 3. Install Dependencies
+
+```bash
+pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+### 4. Download Model Files
+
+The fine-tuned model weights are stored using **Git Large File Storage (LFS)**.
+
+```bash
+git lfs install
+git lfs pull
+```
+
+Verify that the model files were downloaded correctly:
+
+```text
+models/
+├── yolov8_floodnet.pt
+└── segformer_custom/
+```
+
+They should contain the actual model files rather than Git LFS pointer files.
+
+### 5. Configure Environment Variables
+
+Create a `.env` file in the project root:
+
+```env
+GROQ_API_KEY=your_groq_api_key
+```
+
+Do **not** commit `.env` or API keys to version control.
+
+### 6. Run the Application
+
+```bash
+streamlit run app.py
+```
+
+Open the local Streamlit URL shown in the terminal, typically:
+
+```text
+http://localhost:8501
+```
+
+---
 
 ## 📂 Project Structure
 
 ```text
 ResQ-Agent/
-├── models/               # Fine-tuned AI Models (LFS tracked)
-│   ├── yolov8_floodnet.pt       # YOLOv8m for Object Detection
-│   └── segformer_custom/        # SegFormer-b0 for Semantic Segmentation
-├── app.py                # Streamlit Frontend (UI & Session Management)
-├── backend.py            # Core Logic (Neuro-Symbolic Pipeline & Groq)
-├── tools.py              # Vision Inference Wrappers (SAHI + Transformers)
-├── database.py           # SQLite Database for Chat History & Auth
-├── requirements.txt      # Python Dependencies
-├── packages.txt          # System Dependencies (for Hugging Face Spaces)
-├── .env                  # API Keys (Excluded from Git)
-└── assets/               # Screenshots and Demo Images for README
+│
+├── .github/
+│   └── workflows/                  # CI/CD workflows
+│
+├── assets/                         # README screenshots and visual assets
+│
+├── models/
+│   ├── yolov8_floodnet.pt          # Fine-tuned YOLOv8m model
+│   └── segformer_custom/           # Fine-tuned SegFormer model
+│
+├── app.py                          # Streamlit application
+├── backend.py                      # Neuro-symbolic reasoning and LLM pipeline
+├── tools.py                        # Vision inference utilities
+├── database.py                     # SQLite authentication/session storage
+│
+├── requirements.txt                # Python dependencies
+├── packages.txt                    # System-level deployment dependencies
+├── Dockerfile                      # Container configuration
+└── README.md
 ```
+
 ---
 
-### **4. Acknowledgements Section**
+## 🧩 Technology Stack
+
+**Computer Vision**
+- PyTorch
+- YOLOv8
+- SegFormer
+- SAHI
+- OpenCV
+
+**Generative AI**
+- Llama 3
+- Groq
+
+**Application & Data**
+- Streamlit
+- SQLite
+
+**Engineering**
+- Docker
+- Git
+- GitHub Actions / CI/CD
+- Git LFS
+
+---
+
+## ⚠️ Limitations
+
+ResQ-Agent is a research and engineering prototype and should not be treated as a replacement for professional disaster-response assessment.
+
+Current limitations include:
+
+- Performance depends on image quality, viewpoint, and similarity to the FloodNet training distribution.
+- Object detection and segmentation models can produce false positives or false negatives.
+- LLM responses are grounded in structured model outputs but may still contain incorrect interpretations.
+- Real-world deployment would require broader geographic validation and operational testing.
+
+---
+
+## 🔮 Future Work
+
+Potential extensions include:
+
+- Multi-image and temporal disaster analysis
+- Geospatial/GIS integration
+- Improved uncertainty estimation
+- Additional disaster classes beyond flooding
+- Expanded quantitative evaluation of the reasoning layer
+- Real-time processing of drone video streams
+- Broader validation across geographically diverse datasets
+
+---
 
 ## 🤝 Acknowledgements
 
-* **[FloodNet Dataset](https://github.com/BinaLab/FloodNet-Supervised_v1.0):** Rahnemoonfar et al. for the high-resolution post-hurricane imagery used for training.
-* **[Groq](https://groq.com/):** For providing ultra-low latency inference for the Llama-3 reasoning engine.
-* **[Ultralytics](https://github.com/ultralytics/ultralytics):** For the YOLOv8 architecture.
-* **[Hugging Face](https://huggingface.co/):** For the Transformers library and Spaces hosting.
+- **[FloodNet Dataset](https://github.com/BinaLab/FloodNet-Supervised_v1.0)** — Post-disaster aerial imagery used for training and evaluation.
+- **[Ultralytics](https://github.com/ultralytics/ultralytics)** — YOLOv8 object-detection framework.
+- **[Hugging Face](https://huggingface.co/)** — Transformers ecosystem and Spaces hosting.
+- **[Groq](https://groq.com/)** — Low-latency inference for the language reasoning layer.
+- **[SAHI](https://github.com/obss/sahi)** — Slicing Aided Hyper Inference for small-object detection.
 
 ---
 
-**Author:** Tirush Dumil Wickramasingha  
+## 📄 License
 
+This project is licensed under the **Apache License 2.0**.
 
+See the [`LICENSE`](LICENSE) file for details.
 
+---
 
+## 👤 Author
 
+**Tirush Dumil Wickramasingha**
+
+[GitHub](https://github.com/Tirush-Leo) •
+[LinkedIn](YOUR_LINKEDIN_URL) •
+[Hugging Face](https://huggingface.co/Tirush12)
