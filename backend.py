@@ -8,7 +8,7 @@ from tools import object_detection_tool, semantic_segmentation_tool
 load_dotenv()
 
 # --- SETUP GROQ ---
-api_key = "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"
+api_key = "Your API Key"
 
 if not api_key:
     # Default for local testing
